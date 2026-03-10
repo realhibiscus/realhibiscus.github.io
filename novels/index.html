@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OMENVEIL — Blue Imagination</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="novels.css"/>
+</head>
+<body>
+
+  <div id="grain-overlay"></div>
+
+  <a href="../index.html" class="back-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+
+
+  <!-- ══════════════════════════════════════
+       OMENVEIL HERO
+  ══════════════════════════════════════ -->
+  <section id="omenveil-section">
+    <div class="ov-noise"></div>
+    <div class="ov-inner">
+      <div class="ov-glyph-mark">&#x2127;</div>
+      <div class="ov-rule"></div>
+      <p class="ov-eyebrow">A universe of dark fiction</p>
+      <h1 class="ov-title">OMENVEIL</h1>
+      <p class="ov-desc">
+        Something something, lorem ipsum
+      </p>
+      <div class="ov-meta">
+        <span>9 Novels</span>
+        <span class="ov-sep">·</span>
+        <span>Dark Fantasy</span>
+        <span class="ov-sep">·</span>
+        <span>Psychological Horror</span>
+        <span class="ov-sep">·</span>
+        <span>Space Horror</span>
+        <span class="ov-sep">·</span>
+        <span>Romance</span>
+      </div>
+    </div>
+    <div class="ov-scroll-cue">
+      <div class="ov-scroll-line"></div>
+      <span>scroll to enter</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CHARACTER SCROLLER
+  ══════════════════════════════════════ -->
+  <section id="char-section">
+    <div class="char-header">
+      <div class="char-rule"></div>
+      <p class="char-label">The Souls of OMENVEIL</p>
+      <div class="char-rule"></div>
+    </div>
+    <div class="char-track-wrap">
+      <div class="char-track" id="char-track">
+        <div class="char-card" data-color="#1e6fff">
+          <div class="char-img-wrap"><img src="img-char-1.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel I — The Wall at the End of the World</p><p class="char-name">E.J. Ahlquist</p></div>
+        </div>
+        <div class="char-card" data-color="#c47d6e">
+          <div class="char-img-wrap"><img src="img-char-2.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel II — Two Hearts in the Harbor</p><p class="char-name">Suzumiya</p></div>
+        </div>
+        <div class="char-card" data-color="#c9a84c">
+          <div class="char-img-wrap"><img src="img-char-3.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel III — The Runaway Nun's Guide to Parenting</p><p class="char-name">Mother Toria</p></div>
+        </div>
+        <div class="char-card" data-color="#2ec4b6">
+          <div class="char-img-wrap"><img src="img-char-4.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel IV — The Person I Desired to Be</p><p class="char-name">Neptune</p></div>
+        </div>
+        <div class="char-card" data-color="#8b0000">
+          <div class="char-img-wrap"><img src="img-char-5.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel V — Tears of Lie</p><p class="char-name">Yuutsumura</p></div>
+        </div>
+        <div class="char-card" data-color="#cc4400">
+          <div class="char-img-wrap"><img src="img-char-6.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel VI — Tomorrow Never</p><p class="char-name">Kenyu Yamazaki</p></div>
+        </div>
+        <div class="char-card" data-color="#88c0d0">
+          <div class="char-img-wrap"><img src="img-char-7.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel VII — Thin Ice of Memories</p><p class="char-name">Isla Pino</p></div>
+        </div>
+        <div class="char-card" data-color="#4a7fa5">
+          <div class="char-img-wrap"><img src="img-char-8.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel VIII — The Waves of Yesterday</p><p class="char-name">Cyren Q.</p></div>
+        </div>
+        <div class="char-card" data-color="#a08060">
+          <div class="char-img-wrap"><img src="img-char-9.png" alt="" class="char-img"/><div class="char-overlay"></div></div>
+          <div class="char-info"><p class="char-novel-label">Novel IX — To Dust and Nothing</p><p class="char-name">Nour</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="char-drag-hint">— drag to explore —</p>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       I — THE WALL AT THE END OF THE WORLD
+       accent: #1e6fff (cold blue)
+  ══════════════════════════════════════ -->
+  <section id="wall-section" class="novel-section" style="background:#000308;">
+    <canvas id="wall-stars-canvas"></canvas>
+    <div class="wall-vignette"></div>
+    <div class="wall-nebula wn1"></div>
+    <div class="wall-nebula wn2"></div>
+    <div class="wall-slab"><div class="wall-slab-face"></div><div class="wall-slab-scan"></div></div>
+    <!-- THE PORTAL -->
+    <div class="wall-portal" id="wall-portal">
+      <div class="portal-ring pr1"></div>
+      <div class="portal-ring pr2"></div>
+      <div class="portal-ring pr3"></div>
+      <div class="portal-ring pr4"></div>
+      <div class="portal-core"></div>
+      <div class="portal-void"></div>
+      <div class="portal-tendril pt1"></div>
+      <div class="portal-tendril pt2"></div>
+      <div class="portal-tendril pt3"></div>
+      <div class="portal-tendril pt4"></div>
+      <div class="portal-tendril pt5"></div>
+      <div class="portal-shockwave psw"></div>
+    </div>
+    <div class="novel-layout">
+      <div class="novel-num-bg" style="color:rgba(30,111,255,0.04)">I</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(30,111,255,0.75)">Novel I</p>
+        <h1 class="novel-title" style="color:#e8eeff">The Wall at the End<br/>of the World</h1>
+        <div class="novel-rule" style="background:#1e6fff"></div>
+        <p class="novel-genre" style="color:rgba(30,111,255,0.85)">Space Horror · Cosmic Dread</p>
+        <p class="novel-desc" style="color:rgba(200,215,255,0.8)">
+          As his work clashes with rival theories and the scientific community brands him dangerous, Erik pushes further, constructing a machine meant to pierce the veil of reality. But the closer he gets to proving his theory, the more unsettling the truth becomes — because beyond the wall may not simply be infinity. <em>Something might be looking back.</em>
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(30,111,255,0.3);color:rgba(100,160,255,0.9)">The Beginning</span>
+          <span class="ntag" style="border-color:rgba(30,111,255,0.3);color:rgba(100,160,255,0.9)">Cosmic Horror</span>
+          <span class="ntag" style="border-color:rgba(30,111,255,0.3);color:rgba(100,160,255,0.9)">The Unknown</span>
+          <span class="ntag" style="border-color:rgba(30,111,255,0.3);color:rgba(100,160,255,0.9)">Last Contact</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#1e6fff;color:#fff">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       II — TWO HEARTS IN THE HARBOR
+       accent: #c47d6e (warm harbor rose)
+  ══════════════════════════════════════ -->
+  <section id="harbor-section" class="novel-section" style="background:#0a0605;">
+    <canvas id="harbor-sea-canvas"></canvas>
+    <div class="harbor-fog"></div>
+    <!-- Lighthouse on the right -->
+    <div class="lighthouse">
+      <div class="lh-light-beam"></div>
+      <div class="lh-lantern-room">
+        <div class="lh-light"></div>
+        <div class="lh-lantern-glass"></div>
+      </div>
+      <div class="lh-gallery"></div>
+      <div class="lh-tower">
+        <div class="lh-stripe ls1"></div>
+        <div class="lh-stripe ls2"></div>
+        <div class="lh-stripe ls3"></div>
+      </div>
+      <div class="lh-base"></div>
+    </div>
+    <!-- Dock/pier -->
+    <div class="harbor-dock">
+      <div class="dock-post dp1"></div>
+      <div class="dock-post dp2"></div>
+      <div class="dock-post dp3"></div>
+      <div class="dock-plank"></div>
+    </div>
+    <!-- Moored boat silhouette -->
+    <div class="harbor-boat">
+      <div class="boat-hull"></div>
+      <div class="boat-mast"></div>
+      <div class="boat-sail"></div>
+    </div>
+    <div class="harbor-lanterns">
+      <div class="h-lantern hl1"></div>
+      <div class="h-lantern hl2"></div>
+      <div class="h-lantern hl3"></div>
+    </div>
+    <div class="novel-layout harbor-layout">
+      <div class="novel-num-bg" style="color:rgba(196,125,110,0.04)">II</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(196,125,110,0.75)">Novel II</p>
+        <h1 class="novel-title" style="color:#f2ddd8">Two Hearts in<br/>the Harbor</h1>
+        <div class="novel-rule" style="background:#c47d6e"></div>
+        <p class="novel-genre" style="color:rgba(196,125,110,0.85)">Dark Romance · Literary Fiction</p>
+        <p class="novel-desc" style="color:rgba(240,210,205,0.8)">
+          The harbor kept no secrets. Everyone who stayed long enough
+          told the sea everything. She knew that. He knew that. And still
+          they sat at the end of the dock every evening, watching the tide
+          come in, pretending the water couldn't hear them falling apart.
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(196,125,110,0.3);color:rgba(210,150,135,0.9)">Romance</span>
+          <span class="ntag" style="border-color:rgba(196,125,110,0.3);color:rgba(210,150,135,0.9)">Harbor</span>
+          <span class="ntag" style="border-color:rgba(196,125,110,0.3);color:rgba(210,150,135,0.9)">Grief</span>
+          <span class="ntag" style="border-color:rgba(196,125,110,0.3);color:rgba(210,150,135,0.9)">Longing</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#c47d6e;color:#fff">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       III — THE RUNAWAY NUN'S GUIDE TO PARENTING
+       accent: #c9a84c (sacred gold)
+  ══════════════════════════════════════ -->
+  <section id="dark-section" class="novel-section" style="background:#0e0b07;">
+    <div class="chapel-arch"><div class="arch-frame"><div class="arch-pane ap1"></div><div class="arch-pane ap2"></div><div class="arch-pane ap3"></div><div class="arch-pane ap4"></div><div class="arch-glow"></div></div></div>
+    <div class="stone-line sl1"></div><div class="stone-line sl2"></div><div class="stone-line sl3"></div><div class="stone-line sl4"></div>
+    <div class="candle cn-left"><div class="candle-flame"><div class="flame-inner"></div></div><div class="candle-body"></div><div class="candle-glow"></div></div>
+    <div class="candle cn-right"><div class="candle-flame"><div class="flame-inner"></div></div><div class="candle-body"></div><div class="candle-glow"></div></div>
+    <div class="novel-layout">
+      <div class="novel-num-bg" style="color:rgba(201,168,76,0.04)">III</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(201,168,76,0.75)">Novel III</p>
+        <h1 class="novel-title" style="color:#d4c4a8">The Runaway Nun's<br/>Guide to Parenting</h1>
+        <div class="novel-rule" style="background:#c9a84c"></div>
+        <p class="novel-genre" style="color:rgba(201,168,76,0.85)">Dark Fantasy · Gothic Horror</p>
+        <p class="novel-desc" style="color:rgba(212,196,168,0.8)">
+          She fled a temple with two girls the temple called cursed.
+Now in London, they try to live like a normal family but now she realized why the temple called them demons in the first place.
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(201,168,76,0.3);color:rgba(201,168,76,0.85)">Clergy</span>
+          <span class="ntag" style="border-color:rgba(201,168,76,0.3);color:rgba(201,168,76,0.85)">Forbidden</span>
+          <span class="ntag" style="border-color:rgba(201,168,76,0.3);color:rgba(201,168,76,0.85)">Cursed Child</span>
+          <span class="ntag" style="border-color:rgba(201,168,76,0.3);color:rgba(201,168,76,0.85)">Survival</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#c9a84c;color:#0e0b07">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       IV — THE PERSON I DESIRED TO BE
+       accent: #2ec4b6 (sick teal)
+  ══════════════════════════════════════ -->
+  <section id="pixel-section" class="novel-section" style="background:#050e12;">
+    <div class="px-bg-layer"><img src="img-window.png" alt="" class="px-bg-img"/><div class="px-bg-vignette"></div></div>
+    <div class="px-scanlines"></div>
+    <div id="px-particles"></div>
+    <div class="px-glitch-overlay" id="px-glitch-overlay"></div>
+    <div class="novel-layout px-layout">
+      <div class="novel-body px-body">
+        <div class="px-eye-wrap"><div class="px-eye"><div class="px-eye-outer"></div><div class="px-eye-inner"></div><div class="px-eye-pupil"></div><div class="px-eye-lid"></div></div></div>
+        <p class="novel-index" style="color:rgba(46,196,182,0.75)">Novel IV</p>
+        <h1 class="novel-title" style="color:#c8dedd">The Person I<br/>Desired to Be</h1>
+        <div class="novel-rule" style="background:#2ec4b6"></div>
+        <p class="novel-genre" style="color:rgba(46,196,182,0.85)">Psychological Horror · Dark Fantasy</p>
+        <p class="novel-desc" style="color:rgba(200,230,228,0.78)">
+          Neptune wakes in a hospital with no memories, only her name.
+The strangers calling themselves her friends all tell different stories about who she was.
+Now living amongst stranger, she tried to find meaning in life.
+        </p>
+        <div class="px-quote-block">
+          <div class="px-quote-bar" style="background:#2ec4b6"></div>
+          <p class="px-quote-text" style="color:rgba(168,230,226,0.85)">"I just wanted to be someone else."</p>
+        </div>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(46,196,182,0.3);color:rgba(46,196,182,0.85)">Identity</span>
+          <span class="ntag" style="border-color:rgba(46,196,182,0.3);color:rgba(46,196,182,0.85)">Isolation</span>
+          <span class="ntag" style="border-color:rgba(46,196,182,0.3);color:rgba(46,196,182,0.85)">Dread</span>
+          <span class="ntag" style="border-color:rgba(46,196,182,0.3);color:rgba(46,196,182,0.85)">Longing</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#2ec4b6;color:#050e12">Read &rarr;</a>
+      </div>
+      <div class="px-window-panel"><img src="img-window.png" alt="" class="px-window-img"/><div class="px-window-vignette"></div></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       V — TEARS OF LIE
+       accent: #8b0000 (deep crimson)
+  ══════════════════════════════════════ -->
+  <section id="blood-section" class="novel-section" style="background:#f0ece6;">
+    <div class="tears-texture"></div>
+    <div class="tears-paper-crumple"></div>
+    <div class="tears-shadow-tl"></div><div class="tears-shadow-tr"></div>
+    <div class="tears-shadow-bl"></div><div class="tears-shadow-br"></div>
+    <!-- Red side vignettes -->
+    <div class="tears-red-vignette"></div>
+    <div class="blood-drips-top">
+      <div class="blood-drip bd1"></div><div class="blood-drip bd2"></div>
+      <div class="blood-drip bd3"></div><div class="blood-drip bd4"></div>
+      <div class="blood-drip bd5"></div><div class="blood-drip bd6"></div>
+      <div class="blood-drip bd7"></div>
+    </div>
+    <div class="tears-keys">
+  <div class="t-key tk1"><div class="t-key-chain"></div></div>
+  <div class="t-key tk2"><div class="t-key-chain"></div></div>
+  <div class="t-key tk3"><div class="t-key-chain"></div></div>
+</div>
+
+<div class="tears-eye-wrap">
+  <div class="tears-eye">
+    <div class="tears-eye-sclera"></div>
+    <div class="tears-eye-pupil"></div>
+    <div class="tears-blood-tear"></div>
+  </div>
+</div>
+</div>
+    <div class="novel-layout" style="padding-left:120px;">
+      <div class="novel-num-bg" style="color:rgba(139,0,0,0.05)">V</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(139,0,0,0.7)">Novel V</p>
+        <h1 class="novel-title" style="color:#1a0505">Tears of Lie</h1>
+        <div class="novel-rule" style="background:#8b0000"></div>
+        <p class="novel-genre" style="color:rgba(139,0,0,0.8)">Dark Fantasy · Psychological Horror</p>
+        <p class="novel-desc" style="color:rgba(26,5,5,0.8)">
+          In a city where murder and terror are routine, a boy witnesses a secret of the world that was never meant for human eyes.
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(139,0,0,0.28);color:rgba(139,0,0,0.85)">Deception</span>
+          <span class="ntag" style="border-color:rgba(139,0,0,0.28);color:rgba(139,0,0,0.85)">Grief</span>
+          <span class="ntag" style="border-color:rgba(139,0,0,0.28);color:rgba(139,0,0,0.85)">Memory</span>
+          <span class="ntag" style="border-color:rgba(139,0,0,0.28);color:rgba(139,0,0,0.85)">Sacrifice</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#8b0000;color:#fff">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       VI — TOMORROW NEVER
+       accent: #cc4400 (burning ember orange)
+  ══════════════════════════════════════ -->
+  <section id="yakuza-section" class="novel-section" style="background:#080402;">
+    <div class="yakuza-rain"></div>
+    <div class="yakuza-vignette"></div>
+    <!-- Blood splatter marks -->
+    <div class="yk-blood-bg"></div>
+    <div class="yk-splatter yks1"></div>
+    <div class="yk-splatter yks2"></div>
+    <div class="yk-splatter yks3"></div>
+    <!-- Knives -->
+    <div class="yk-knife ykk1"><div class="knife-blade"></div><div class="knife-guard"></div><div class="knife-handle"></div></div>
+    <div class="yk-knife ykk2"><div class="knife-blade"></div><div class="knife-guard"></div><div class="knife-handle"></div></div>
+    <div class="yk-knife ykk3"><div class="knife-blade"></div><div class="knife-guard"></div><div class="knife-handle"></div></div>
+    <!-- Handgun silhouette -->
+    <div class="yk-gun ykg1">
+      <div class="gun-barrel"></div>
+      <div class="gun-slide"></div>
+      <div class="gun-grip"></div>
+      <div class="gun-trigger-guard"></div>
+    </div>
+    <div class="yk-gun ykg2">
+      <div class="gun-barrel"></div>
+      <div class="gun-slide"></div>
+      <div class="gun-grip"></div>
+      <div class="gun-trigger-guard"></div>
+    </div>
+    <!-- Dripping blood from top -->
+    <div class="yk-drips">
+      <div class="yk-drip yd1"></div>
+      <div class="yk-drip yd2"></div>
+      <div class="yk-drip yd3"></div>
+      <div class="yk-drip yd4"></div>
+    </div>
+    <div class="novel-layout">
+      <div class="novel-num-bg" style="color:rgba(204,68,0,0.05)">VI</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(204,68,0,0.75)">Novel VI</p>
+        <h1 class="novel-title" style="color:#f0ddd0">Tomorrow Never</h1>
+        <div class="novel-rule" style="background:#cc4400"></div>
+        <p class="novel-genre" style="color:rgba(204,68,0,0.85)">Dark Fantasy · Action · Cursed Life</p>
+        <p class="novel-desc" style="color:rgba(240,210,190,0.8)">
+          After his master's death, he has no will to live. He counted.
+          Knives, bullets, fire, a fall from the Katsura Bridge at midnight.
+          Each time he wakes in the rain, whole again, aching for the one thing
+          he cannot have. Death will not come for a man it has already claimed
+          and returned. But the underworld never stops trying.
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(204,68,0,0.3);color:rgba(220,110,60,0.9)">Cursed Immortal</span>
+          <span class="ntag" style="border-color:rgba(204,68,0,0.3);color:rgba(220,110,60,0.9)">Yakuza</span>
+          <span class="ntag" style="border-color:rgba(204,68,0,0.3);color:rgba(220,110,60,0.9)">Death Wish</span>
+          <span class="ntag" style="border-color:rgba(204,68,0,0.3);color:rgba(220,110,60,0.9)">Fighting</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#cc4400;color:#fff">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       VII — THIN ICE OF MEMORIES
+       accent: #88c0d0 (pale ice blue)
+  ══════════════════════════════════════ -->
+  <section id="ice-section" class="novel-section" style="background:#03080e;">
+    <canvas id="ice-canvas"></canvas>
+    <div class="ice-vignette"></div>
+    <!-- Memory film frames floating -->
+    <div class="ice-film-strip ifs1">
+      <div class="film-frame ff1"></div>
+      <div class="film-frame ff2"></div>
+      <div class="film-frame ff3"></div>
+    </div>
+    <div class="ice-film-strip ifs2">
+      <div class="film-frame ff4"></div>
+      <div class="film-frame ff5"></div>
+    </div>
+    <!-- Ice crack overlay -->
+    <div class="ice-crack-overlay"></div>
+    <div class="novel-layout">
+      <div class="novel-num-bg" style="color:rgba(136,192,208,0.04)">VII</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(136,192,208,0.75)">Novel VII</p>
+        <h1 class="novel-title" style="color:#ddeef4">Thin Ice of<br/>Memories</h1>
+        <div class="novel-rule" style="background:#88c0d0"></div>
+        <p class="novel-genre" style="color:rgba(136,192,208,0.85)">Dark Fantasy · Psychological</p>
+        <p class="novel-desc" style="color:rgba(200,230,240,0.8)">
+          The ice remembers everything. Every footprint, every crack,
+          every moment someone stood too long above the deep.
+          She had come here to forget. Instead she found that the mountains
+          had been keeping her memories safe all along — playing them
+          back beneath her feet like film, frame by frame, yet it doesn't feel real...
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(136,192,208,0.3);color:rgba(160,210,225,0.9)">Snow</span>
+          <span class="ntag" style="border-color:rgba(136,192,208,0.3);color:rgba(160,210,225,0.9)">Memory</span>
+          <span class="ntag" style="border-color:rgba(136,192,208,0.3);color:rgba(160,210,225,0.9)">Isolation</span>
+          <span class="ntag" style="border-color:rgba(136,192,208,0.3);color:rgba(160,210,225,0.9)">Frozen Time</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#88c0d0;color:#03080e">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       VIII — THE WAVES OF YESTERDAY
+       accent: #4a7fa5 (stormy sea)
+  ══════════════════════════════════════ -->
+  <section id="waves-section" class="novel-section" style="background:#020810;">
+    <canvas id="waves-canvas"></canvas>
+    <div class="waves-vignette"></div>
+    <!-- Distant ship silhouette -->
+    <div class="waves-ship">
+      <div class="ship-hull-main"></div>
+      <div class="ship-mast sm1"></div>
+      <div class="ship-mast sm2"></div>
+      <div class="ship-sail wss1"></div>
+      <div class="ship-sail wss2"></div>
+      <div class="ship-flag"></div>
+    </div>
+    <!-- Storm cloud layers -->
+    <div class="storm-cloud sc1"></div>
+    <div class="storm-cloud sc2"></div>
+    <div class="storm-cloud sc3"></div>
+    <div class="novel-layout waves-layout">
+      <div class="novel-num-bg" style="color:rgba(74,127,165,0.04)">VIII</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(74,127,165,0.75)">Novel VIII</p>
+        <h1 class="novel-title" style="color:#c8dce8">The Waves of<br/>Yesterday</h1>
+        <div class="novel-rule" style="background:#4a7fa5"></div>
+        <p class="novel-genre" style="color:rgba(74,127,165,0.85)">Dark Literary Fiction · Loss</p>
+        <p class="novel-desc" style="color:rgba(180,210,230,0.8)">
+          The storm does not care who you were before it found you.
+          She had learned this standing at the bow of a ship with no name,
+          watching the horizon swallow everything she thought was permanent.
+          The sea gives back what it takes — but never in the same shape.
+          But she can't stop sailing, for needing to stop means they will catch you alive.
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(74,127,165,0.3);color:rgba(100,160,200,0.9)">Stormy Seas</span>
+          <span class="ntag" style="border-color:rgba(74,127,165,0.3);color:rgba(100,160,200,0.9)">Loss</span>
+          <span class="ntag" style="border-color:rgba(74,127,165,0.3);color:rgba(100,160,200,0.9)">Survival</span>
+          <span class="ntag" style="border-color:rgba(74,127,165,0.3);color:rgba(100,160,200,0.9)">The Past</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#4a7fa5;color:#fff">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       IX — TO DUST AND NOTHING
+       accent: #a08060 (ash and ember)
+  ══════════════════════════════════════ -->
+  <section id="dust-section" class="novel-section" style="background:#050402;">
+    <div class="dust-particles" id="dust-particles"></div>
+    <div class="dust-vignette"></div>
+    <!-- Crumbling architecture ruins -->
+    <div class="dust-arch da1">
+      <div class="dust-arch-left"></div>
+      <div class="dust-arch-right"></div>
+      <div class="dust-arch-top"></div>
+    </div>
+    <div class="dust-pillar dp-l"></div>
+    <div class="dust-pillar dp-r"></div>
+    <!-- Falling debris -->
+    <div class="dust-debris ddb1"></div>
+    <div class="dust-debris ddb2"></div>
+    <div class="dust-debris ddb3"></div>
+    <div class="dust-debris ddb4"></div>
+    <!-- Horizon glow -->
+    <div class="dust-horizon"></div>
+    <div class="novel-layout">
+      <div class="novel-num-bg" style="color:rgba(160,128,96,0.04)">IX</div>
+      <div class="novel-body">
+        <p class="novel-index" style="color:rgba(160,128,96,0.75)">Novel IX</p>
+        <h1 class="novel-title" style="color:#e8e0d8">To Dust<br/>and Nothing</h1>
+        <div class="novel-rule" style="background:#a08060"></div>
+        <p class="novel-genre" style="color:rgba(160,128,96,0.85)">Dark Fantasy · Apocalyptic</p>
+        <p class="novel-desc" style="color:rgba(230,215,200,0.8)">
+          (ARCHIVED LOCKED.)
+        </p>
+        <div class="novel-tags">
+          <span class="ntag" style="border-color:rgba(160,128,96,0.3);color:rgba(190,158,120,0.9)">End of World</span>
+          <span class="ntag" style="border-color:rgba(160,128,96,0.3);color:rgba(190,158,120,0.9)">Solitude</span>
+          <span class="ntag" style="border-color:rgba(160,128,96,0.3);color:rgba(190,158,120,0.9)">Silence</span>
+          <span class="ntag" style="border-color:rgba(160,128,96,0.3);color:rgba(190,158,120,0.9)">Last Witness</span>
+        </div>
+        <a href="#" class="read-btn" style="--accent:#a08060;color:#050402">Read &rarr;</a>
+      </div>
+    </div>
+    <a href="#omenveil-section" class="back-to-top">&#8593; Return to OMENVEIL</a>
+  </section>
+
+
+  <script src="novels.js"></script>
+</body>
+</html>

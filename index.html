@@ -1,728 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Anthemian Typology Test</title>
-  <style>
-   /* ===============================
-       COLOR GUIDE (change per personality)
-       ===============================
-       --hero-color: main background colour of the header
-       --hero-text: text colour inside the header
-       --accent: highlight colour for titles, small buttons
-       --page-bg: page background
-       =============================== */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blue Imagination – Artist & Illustrator</title>
 
-    :root{
-      --hero-color: #363636; /* light blue — change this to personality theme colour */
-      --hero-text: #FFFFFF; /* text colour on hero */
-      --accent: ##F2F0EF; /* accent colour for links/titles */
-      --page-bg: #f5fbff; /* overall background */
-      --max-width: 900px;
-      --body-text: #222;
-      --muted: #444;
-      --radius: 12px;
-      --gap: 28px;
-    }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
 
-    *{box-sizing: border-box}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: var(--page-bg);
-      color: var(--body-text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.55;
-    }
+  <!-- GSAP animation library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    /* ===============================
-       HEADER BAR (top navigation)
-       =============================== */
-    header.site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--hero-color);
-      color: var(--hero-text);
-      padding: 12px 24px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .logo-area{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .logo-placeholder{
-      width:40px;
-      height:auto;
-      border-radius:8px;
-      background:rgba(0,0,0,0);
-    }
-
-    .site-title{
-      font-weight:700;
-      font-size:18px;
-      color: var(--hero-text);
-    }
-
-    .nav-links{
-      display:flex;
-      gap:18px;
-    }
-
-    .nav-links a{
-      text-decoration:none;
-      color:var(--hero-text);
-      font-weight:500;
-      font-size:15px;
-      transition:opacity .2s;
-    }
-
-    .nav-links a:hover{opacity:0.7;}
-	/* Keep header above drawer so logo remains visible */
-header.site-header {
-  position: relative;
-  z-index: 60; /* higher than drawer and overlay */
-}
-
-/* make logo button visually neutral but accessible */
-.logo-btn{
-  background: transparent;
-  border: 0;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  line-height: 1;
-}
-.logo-btn:focus{ outline: 3px solid rgba(255,255,255,0.08); border-radius:8px; }
-
-/* Drawer overlay (dim background) - sits under header */
-.drawer-overlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 45; /* under header (60) but above page */
-  opacity: 0;
-  transition: opacity .22s ease;
-  pointer-events:none;
-}
-
-/* Visible overlay */
-.drawer-overlay.open{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Side drawer */
-.side-drawer{
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 320px;                /* desktop drawer width */
-  max-width: 84%;
-  transform: translateX(-100%);
-  transition: transform .28s cubic-bezier(.2,.9,.2,1);
-  z-index: 50;                 /* under header (60) but above page */
-  will-change: transform;
-  box-shadow: 6px 0 24px rgba(0,0,0,0.18);
-  background: var(--hero-color, #111);
-  color: var(--hero-text, #fff);
-  pointer-events: none;
-}
-
-/* open state */
-.side-drawer.open{
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-/* drawer inner: fill the drawer and allow nav to scroll */
-.drawer-inner{
-  padding: 20px;
-  display:flex;
-  flex-direction: column;
-  gap: 12px;
-
-  /* NEW: make inner fill height and allow content scrolling while footer stays visible */
-  height: 100%;
-  overflow: auto;
-}
-
-/* footer sits flush to the bottom */
-.drawer-footer{
-  margin-top: auto;           /* pushes footer to bottom */
-  padding-top: 12px;
-  font-size: 13px;
-  text-align: center;
-  color: var(--hero-text, #fff);
-  opacity: 0.9;
-  border-top: 1px solid rgba(255,255,255,0.04);
-}
-
-/* brand blue */
-.drawer-footer .brand{
-  color: #3aa0ff;    /* adjust to your preferred blue */
-  font-weight: 600;
-}
-
-
-/* close button inside drawer */
-.drawer-close{
-  background: transparent;
-  border: 0;
-  font-size: 28px;
-  line-height: 1;
-  color: inherit;
-  align-self: flex-end;
-  cursor: pointer;
-}
-
-/* drawer nav links */
-.drawer-nav{
-  display:flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
-}
-.drawer-nav a{
-  display:block;
-  text-decoration:none;
-  color: inherit;
-  padding: 10px 8px;
-  border-radius: 8px;
-  font-weight: 600;
-}
-.drawer-nav a:hover{ background: rgba(255,255,255,0.03); }
-
-/* Smaller screens: narr
-
-    /* ===============================
-       HERO SECTION
-       =============================== */
-    .hero{
-      background: linear-gradient(180deg, var(--hero-color) 0%, color-mix(in srgb, var(--hero-color) 80%, white) 100%);
-      color: var(--hero-text);
-      padding: 64px 20px;
-      text-align: left;
-      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-    }
-
-    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
-
-    .title-row{display:flex;align-items:baseline;gap:18px}
-    h1{font-size:44px;margin:0;line-height:1;}
-    .code{font-size:18px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,0.06);color:var(--accent);font-weight:600}
-    .subtitle{margin-top:12px;color:#FFFFFF(--muted);font-size:18px}
-	
-	.type-quote{
-  font-style: italic;
-  color: var(--muted);
-  font-size: 25px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  padding-left: 16px;
-  border-left: 3px solid var(--accent);
-  opacity: 0.9;
-}
-
-	.type-quote .quote-author{
-  display: block;
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--accent);
-  text-align: right;
-  padding-right: 10px;
-}
-
-
-    .card{
-      background:white;
-      border-radius:var(--radius);
-      padding:28px;
-      margin-top:var(--gap);
-      box-shadow: 0 6px 20px rgba(8,30,50,0.06);
-    }
-
-    h2{margin:0 0 12px 0;color:var(--accent);font-size:20px}
-    p{margin:0 0 16px 0;font-size:16px}
-
-    .list{margin:12px 0 18px 0;padding-left:18px}
-    .list li{margin:10px 0}
-    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.06),transparent);margin:22px 0;border-radius:2px}
-
-    /* small screens */
-    @media (max-width:640px){
-      h1{font-size:34px}
-      .hero{padding:48px 16px}
-      .nav-links{display:none;}
-    }
-
-    /* utility */
-    .muted{color:var(--muted)}
-    .strong{font-weight:700}
-    /* Monochrome theme — black & white only.
-       To customise layout/text, edit the HTML below; there are no colour variables. */
-    :root{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
-    html,body{height:100%;}
-    body{
-      background:#ffffff;
-      margin:0;
-   
-      color:#000000;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-
-
-    .question{margin:12px 0;padding:14px;border-radius:10px;background:#fff;border:1px solid #f3f3f3}
-    .qtitle{font-weight:700;margin-bottom:10px;color:#000}
-    .options{display:flex;gap:10px;flex-wrap:wrap}
-    label.option{
-      display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#ffffff;border:1px solid #f2f2f2;cursor:pointer;font-size:14px;color:#0b0b0b;
-      min-width:220px;
-    }
-    label.option:hover{background:#fafafa}
-    input[type=radio]{ /* default styling — no accent-colour overrides to keep monochrome */ width:16px;height:16px;margin:0}
-
-    .controls{display:flex;gap:12px;align-items:center;margin-top:14px}
-    button{cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid #111;background:#111;color:#fff;font-weight:700}
-    button.secondary{background:#fff;color:#111;border:1px solid #e2e2e2;font-weight:700}
-    button.secondary:hover{background:#fafafa}
-
-    .muted{color:#555;font-size:13px}
-    .result{margin-top:18px;padding:18px;border-radius:12px;background:#fafafa;color:#000;border:1px solid #eee;display:none}
-    .result h2{margin:8px 0 0;font-size:18px}
-    .result .code{font-weight:900;font-size:16px}
-    .note{font-size:13px;color:#333;margin-top:8px}
-    .alert{background:#fff3cd;color:#92400e;padding:10px;border-radius:8px;margin-top:10px;display:none;border:1px solid #f5e6b8}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* responsive */
-    @media (max-width:700px){
-      .options{flex-direction:column}
-      label.option{min-width:unset;width:100%}
-      .nav-links{display:none}
-    }
-
-    /* small explanatory footer */
-    .footer-note{margin-top:18px;font-size:13px;color:#444}
-	
-	
-	.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 40px 0;
-}
-
-.nav-btn {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  padding: 12px 26px;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  border-radius: 8px;
-}
-
-.nav-btn:hover {
-  background-color: black;
-  color: white;
-  transform: scale(1.05);
-}
-
-.nav-btn:active {
-  transform: scale(0.97);
-  opacity: 0.8;
-}
-  </style>
+  <!-- Your stylesheet — must be in the same folder as this file! -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<link rel="icon" href="transparent-arc_white.png" type="image/png">
 <body>
 
-  <header class="site-header">
-  <div class="logo-area">
-    <!-- logo button toggles the drawer -->
-    <button id="logoBtn" class="logo-btn" aria-controls="sideDrawer" aria-expanded="false" aria-label="Open menu">
-      <img src="arc_white.png" alt="Anthemia logo" class="logo-placeholder">
-    </button>
-    <div class="site-title">OCTI by A.R.C.</div>
-  </div>
+  <!-- Floating background particles (JavaScript fills this) -->
+  <div id="bg-canvas"></div>
 
-  <nav class="nav-links desktop-nav" aria-label="Primary navigation">
-    <a href="index.html">Test Explanation</a>
-    <a href="alltype.html">All Types</a>
-    <a href="history.html">History</a>
-    <a href="author.html">Creator</a>
-  </nav>
-</header>
 
-<!-- LEFT SLIDE-IN DRAWER + OVERLAY -->
-<div id="drawerOverlay" class="drawer-overlay" hidden></div>
+  <!-- =============================================
+       NAVIGATION BAR
+       ============================================= -->
+  <nav id="navbar">
 
-<aside id="sideDrawer" class="side-drawer" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="drawer-inner">
-    <button id="drawerClose" class="drawer-close" aria-label="Close menu">&times;</button>
-
-    <nav class="drawer-nav" aria-label="Drawer navigation">
-      <a href="index.html">Test Explanation</a>
-      <a href="alltype.html">All Types</a>
-      <a href="history.html">History</a>
-      <a href="author.html">Creator</a>
-    </nav>
-  <div class="drawer-footer">
-  © <span id="drawerYear"></span> <span class="brand">Blue Imagination</span>
-	</div>
-  </div>
-</aside>
-
-  <section class="hero">
-    <div class="container">
-      <div class="title-row">
-        <h1>
-		ANTHEMIAN TYPOLOGY
-		</h1>
-        <div class="code">
-		OCTI SYSTEM
-		</div>
+    <div class="nav-logo">
+      <div class="nav-cloud-shape">
+        <div class="cloud-bump b1"></div>
+        <div class="cloud-bump b2"></div>
+        <div class="cloud-base"></div>
       </div>
-      <div class="subtitle">
-	 Made by Blue Imagination
-	  </div>
+      <!-- EDIT: change site name here -->
+      Blue Imagination
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#gallery">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Let's Connect!</a></li>
+    </ul>
+
+  </nav>
+
+
+  <!-- =============================================
+       SECTION 1 — HERO (the big welcome area)
+       ============================================= -->
+  <section id="hero">
+    <div class="hero-card">
+
+      <!-- Decorative CSS hearts (top corners) -->
+      <div class="deco-heart dh1"></div>
+      <div class="deco-heart dh2"></div>
+      <div class="deco-heart dh3"></div>
+      <div class="deco-heart dh4"></div>
+
+      <!-- Blue Hibiscus flower made in CSS -->
+      <div class="hibiscus-wrap">
+        <div class="hibiscus">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="stamen">
+            <div class="stamen-dot d1"></div>
+            <div class="stamen-dot d2"></div>
+            <div class="stamen-dot d3"></div>
+            <div class="stamen-dot d4"></div>
+            <div class="stamen-dot d5"></div>
+            <div class="stamen-core"></div>
+          </div>
+        </div>
+        <div class="css-star star1"></div>
+        <div class="css-star star2"></div>
+        <div class="css-star star3"></div>
+        <div class="css-star star4"></div>
+      </div>
+
+      <!-- EDIT: your welcome message -->
+      <div class="hero-text">
+        <!-- Your signature as the main hero title! -->
+        <img src="signature.png" alt="Blue Imagination signature" class="hero-signature" />
+        <p>Creating art with a touch of magic!</p>
+        <a href="#gallery" class="btn-primary">
+          View My Work
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <main class="container">
-    <section class="card">
-		
-     
-      <p>
-	  Welcome to Anthemian Typology, a framework for understanding how you're naturally wired to operate. Think of it as a user manual for your own mind. It gives you the language to understand your innate strengths and preferences. By exploring the five axes below, you can discover your unique approach to thinking, working, and living.
-	  </p>
-	  
-	  <p>
-	  This test is from OMENVEIL Series by Blue Imagination. Here is how each lettering work if you're wondering:
-	  </p>
-	  
-	  <div class="sep"></div>
-	  <h1> I. How You Approach the World: Adaptive vs. Orderly </h1>
-	  <div class="sep"></div>
-	  
-		<p> 
-		This describes your fundamental strategy for dealing with your surroundings. Are you someone who goes with the flow, or do you create the flow yourself?
-		</p>
-		
-		<h2> Adaptive (A)  </h2>
-		<p> 
-		You are a master of flexibility. Your core strength is reacting to the world as it is, fluidly changing your approach to fit the situation. You see life as a dynamic river and excel by navigating its currents, not by trying to dam it.
-		</p>
-		<ul class="list">
-        <li>You thrive on: Improvisation and spontaneity.
-		</li>
-        <li>
-		Your process is: Responsive and situational.
-		</li>
-        <li>
-		You excel in: Unpredictable, fast-changing environments where you have to think on your feet.
-		</li>
-		</ul>
-		
-		<h2>Orderly (O)</h2>
-		<p> 
-		You are a natural architect of systems. Your core strength is structuring the world around you, creating plans and processes to ensure predictable, high-quality results. You see life as a system to be understood, organized, and optimized.
-		</p>
-		<ul class="list">
-        <li>
-		You thrive on: Procedures and planning.
-		</li>
-        <li>
-		Your process is: Proactive and systematic.
-		</li>
-        <li>
-		You excel in: Stable environments where precision, consistency, and long-term strategy are key.
-		</li>
-		</ul>
-		
-		<div class="sep"></div>
-	  <h1> II. How You Think: Convergent, Divergent, or Lateral </h1>
-	  <div class="sep"></div>
-	  
-		<p> 
-		This axis reveals the "shape" of your thought process. When faced with a question, how does your mind naturally move to find an answer?
-		</p>
-		
-		<h2> Convergent (C)  </h2>
-		<p> 
-		Your thinking is like a funnel. You excel at taking in a wide range of information, logically eliminating possibilities, and narrowing everything down to a single, correct answer. You are a natural problem-solver and analyst.
-		</p>
-		<ul class="list">
-        <li>Your goal: Find the right answer.
-		</li>
-        <li>
-		Best for: Tasks requiring accuracy, data analysis, and logic (e.g., diagnosing a problem, solving a puzzle).
-		</li>
-		</ul>
-		
-		<h2>Divergent (D) </h2>
-		<p> 
-		Your thinking is like a firework. You excel at starting from a single point and exploding outward into countless new ideas and possibilities. You are a natural brainstormer and innovator.
-		</p>
-		<ul class="list">
-        <li>
-		Your goal: Generate many new options.
-		</li>
-        <li>
-		Best for: Tasks requiring creativity and imagination (e.g., brainstorming new products, creating art).
-		</li>
-		</ul>
-		
-		<h2>Lateral (L) </h2>
-		<p> 
-		Your thinking is like finding a hidden door. Instead of working within the existing framework, you sidestep the problem entirely, challenge the core assumptions, and come at it from a completely new angle. You are a true "out-of-the-box" thinker.
-		</p>
-		<ul class="list">
-        <li>
-		Your goal: Reframe the question itself.
-		</li>
-        <li>
-		Best for: Solving impossible problems and creating true paradigm shifts.
-		</li>
-		</ul>
-		
-		
-		<div class="sep"></div>
-	  <h1> III. How You Get Things Done: Thinker vs. Worker</h1>
-	  <div class="sep"></div>
-	  
-		<p> 
-		This defines where you feel the most satisfaction and sense of completion. Is the work done when the idea is perfect, or when the task is physically finished?
-		</p>
-		
-		<h2> Thinking (T) </h2>
-		<p> 
-		You are a conceptualizer. For you, the most important work happens in your mind. The "finished product" is a perfect plan, a brilliant strategy, or a complete theory. The physical execution is just a secondary step.
-		</p>
-		<ul class="list">
-        <li>Satisfaction comes from: A flawless blueprint, a sound argument, or a moment of clear insight.
-		</li>
-        <li>
-		Motto: "Get the plan right, and the rest will follow."
-		</li>
-		</ul>
-		
-		<h2>Working (W)  </h2>
-		<p> 
-		You are an implementer. For you, ideas are just starting points. The real work is in the application—the process of building, creating, and making a tangible impact on the world.
-		</p>
-		<ul class="list">
-        <li>
-		Satisfaction comes from: A finished product, a completed task, or a visible result.
-		</li>
-        <li>
-		Motto: "An idea is worthless until you make it real."
-		</li>
-		</ul>
-	  
-	  
-	  <div class="sep"></div>
-	  <h1> IV. What Is Your Method of Knowing Information: Public vs. Quiet</h1>
-	  <div class="sep"></div>
-	  
-		<p> 
-		This describes how you get your day to day information. Do you gain them from being around others, or do you need solitude to search it for yourself?
-		</p>
-		
-		<h2> Public (P) </h2>
-		<p> 
-		You are energized by external interaction. You often think best out loud, bouncing ideas off others and drawing stimulation from social settings. Being with people charges your brain up. A Public person gathers information by exposure.
-		</p>
-		<ul class="list">
-        <li>You process information: Externally, through discussion, with others.
-		</li>
-        <li>
-		You feel best: In collaborative and active environments.
-		</li>
-		</ul>
-		
-		<h2>Quiet (Q) </h2>
-		<p> 
-		You are energized by internal reflection. You do your best thinking in your own head, processing things deeply before you speak. Solitude is what charges your brain up. A Quiet (Q) person is someone who gathers information by internalisation.
-		</p>
-		<ul class="list">
-        <li>
-		You process information: Internally, through introspection, by yourself.
-		</li>
-        <li>
-		You feel best: In calm environments where you have space to think.
-		</li>
-		</ul>
-		
-		<h2>Note</h2>
-		<p> 
-		In the Anthemian system, Public (P) and Quiet (Q) are not the same as being extroverted or introverted. They describe where your energy flows and how you orient yourself in a group. It has nothing to do with shyness. Both can be scientists, artists, or leaders — they just operate with opposite data-gathering instincts.
-		</p>
-		<p> 
-		A <strong>Public (P)</strong> type feels comfortable stepping forward, leading, coordinating, or setting the social rhythm. They tend to think through interaction and draw stability from the presence of others. Being “Public” doesn’t sincerely mean you’re loud or attention-seeking, it's just that your energy aligns with participation and guidance. Public type may even prefer to be alone and be independent depending on the person, but what making them Public is that they are confident enough to step and debate their point comfortably for hours, lead without many thinking, and more than happy when someone wants to follow them.
-		</p>
-		<p>
-		A very introverted Public (iP) might not want to socialise much, but when they must — say, in a debate or a presentation — they come alive intellectually. They gain focus from engagement and genuinely looks happy doing so, even if they later rather sleep than going to parties. The act of presenting structured thought energizes them but the unstructured chaos of a party will drain them.
-		</p>
-		<p> 
-		A <strong>Quiet (Q)</strong> type, meanwhile, usually prefers to move within a small trusted circle. They process things internally, and leadership feels unnatural or even draining. A Quiet person can be charismatic, outspoken, and confident, yet still prefer to observe, reflect, and contribute rather than direct, fearing what they say might make a situation worse. They are more likely to feel awkward when suddenly put into a position where they have to lead a team, or even one person. They are skilled at navigating social currents but are not usually equipped to direct them, and the responsibility is a significant source of stress.
-		</p>
-		<p>
-		An extroverted Quiet (eQ) enjoys people and can perform socially, but they burn energy doing so and need alone-time to refuel. They’re that friend who’s radiant at a party, then disappears for three days afterwards to recover.
-		</p>
-		
-		
-		<div class="sep"></div>
-	  <h1> V. Your Inner Climate: Cyclothymic vs. Schizothymic</h1>
-	  <div class="sep"></div>
-	  
-		<p> 
-		This axis describes the underlying rhythm of your emotional and energetic world. Is your inner landscape dynamic and fluctuating, or is it stable and consistent?
-		</p>
-		
-		<h2> Cyclothymic (SL)  </h2>
-		<p> 
-		Your temperament is warm and dynamic. You have a naturally fluctuating emotional energy, with cycles of high enthusiasm and periods of quiet sensitivity. This makes you highly attuned to the emotional and personal side of life.
-		</p>
-		<ul class="list">
-        <li>Disposition: People-oriented, expressive, and vibrant.
-		</li>
-        <li>
-		Inner World: Like a tide, with a natural rhythm of highs and lows.
-		</li>
-		</ul>
-		
-		<h2>Schizothymic (SK) </h2>
-		<p> 
-		Your temperament is cool and stable. You have a consistent emotional baseline, allowing for immense focus and objectivity. You tend to engage with the world through logic and ideas rather than feelings.
-		</p>
-		<ul class="list">
-        <li>
-		Disposition: Object-oriented, analytical, and reserved.
-		</li>
-        <li>
-		Inner World: Like a calm, deep lake, consistent and ideational.
-		</li>
-		</ul>
-		
-<div class="sep"></div>
-		<p>A Note from the Imaginarium</p>
-	  <p>This cognitive framework is from the OMENVEIL Series. All Imaginative Rights are chartered and held by Blue Imagination. This material is intended for personal resonance and narrative exploration only.</p>
-	  <p>Unauthorized replication, or the analysis of this typology by un-attuned minds, is undertaken at the user's own risk and may result in existential drift, paradigm bleed, or a sudden and irreversible interest in esoteric cartography. Proceed with awareness. </p>
-	  
-	  <p>© 2025, Blue Imagination. All concepts chartered from OMENVEIL. </p>
-	  
-	  
-	  <div class="sep"></div>
-	  <div class="button-container">
-  <button class="nav-btn" onclick="location.href='take_test.html'">TAKE THE TEST NOW</button>
-		  <button class="nav-btn" onclick="location.href='alltype.html'">SEE ALL THE TYPES</button>
-		  <button class="nav-btn" onclick="location.href='author.html'">THE MAKER</button>
-  
-</div>
+
+  <!-- =============================================
+       SECTION 2 — GALLERY
+       ============================================= -->
+  <section id="gallery">
+    <div class="section-card scroll-reveal">
+
+      <div class="section-title">
+        <h2>My Gallery</h2>
+        <p>Recent Works</p>
+      </div>
+
+      <!-- Gallery grid — copy a .gallery-item block to add more cards -->
+      <div class="gallery-grid">
+
+        <div class="gallery-item scroll-reveal" onclick="window.location='novels/index.html'" style="cursor:pointer;">
+          <div class="g-thumb t-illus"></div>
+          <div class="gallery-label">Novels ↗</div>
+        </div>
+
+        <div class="gallery-item scroll-reveal">
+          <div class="g-thumb t-char"></div>
+          <div class="gallery-label">Illustrations</div>
+        </div>
+
+        <div class="gallery-item scroll-reveal">
+          <div class="g-thumb t-cute"></div>
+          <div class="gallery-label">Cute Designs</div>
+        </div>
+
+        <div class="gallery-item scroll-reveal">
+          <div class="g-thumb t-fan"></div>
+          <div class="gallery-label">Fan Art</div>
+        </div>
+
+      </div>
+
+      <div class="btn-row">
+        <a href="#" class="btn-secondary">
+          See More
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
 
-	</section>
-  </main>
-  <script>
-(function(){
-  const logoBtn = document.getElementById('logoBtn');
-  const sideDrawer = document.getElementById('sideDrawer');
-  const drawerOverlay = document.getElementById('drawerOverlay');
-  const drawerClose = document.getElementById('drawerClose');
+  <!-- =============================================
+       SECTION 3 — ABOUT ME
+       ============================================= -->
+  <section id="about">
+    <div class="about-inner scroll-reveal">
 
-  if(!logoBtn || !sideDrawer || !drawerOverlay) return;
+      <!-- Smaller hibiscus on the side -->
+      <div class="hibiscus-wrap small">
+        <div class="hibiscus">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="stamen">
+            <div class="stamen-dot d1"></div>
+            <div class="stamen-dot d2"></div>
+            <div class="stamen-dot d3"></div>
+            <div class="stamen-dot d4"></div>
+            <div class="stamen-dot d5"></div>
+            <div class="stamen-core"></div>
+          </div>
+        </div>
+      </div>
 
-  // helpers
-  function openDrawer(){
-    sideDrawer.classList.add('open');
-    drawerOverlay.classList.add('open');
-    sideDrawer.setAttribute('aria-hidden','false');
-    logoBtn.setAttribute('aria-expanded','true');
-    drawerOverlay.hidden = false;
-    // prevent page scroll while drawer open
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    // focus the close button for keyboard users
-    setTimeout(()=> drawerClose && drawerClose.focus(), 160);
-  }
-  function closeDrawer(){
-    sideDrawer.classList.remove('open');
-    drawerOverlay.classList.remove('open');
-    sideDrawer.setAttribute('aria-hidden','true');
-    logoBtn.setAttribute('aria-expanded','false');
-    // allow overlay to fade, then hide attribute
-    setTimeout(()=> { drawerOverlay.hidden = true; }, 260);
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-    // return focus to logo
-    logoBtn.focus();
-  }
-  function toggleDrawer(){ sideDrawer.classList.contains('open') ? closeDrawer() : openDrawer(); }
+      <!-- EDIT: write about yourself here! -->
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p class="subtitle">Nice to meet you!</p>
+        <div class="about-bubble">
+          <!-- EDIT: change this to your own bio -->
+          I'm an illustrator who loves to create adorable and dreamy art!
+          I find magic in soft colors, cute characters, and cozy little worlds.
+          Every drawing is a little adventure!
+        </div>
+        <a href="#contact" class="btn-primary">
+          Read More
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
 
-  // open/close on logo click (works on desktop + touch)
-  logoBtn.addEventListener('click', function(e){
-    e.preventDefault();
-    toggleDrawer();
-  });
+    </div>
+  </section>
 
-  // close handlers
-  drawerOverlay.addEventListener('click', closeDrawer);
-  drawerClose && drawerClose.addEventListener('click', closeDrawer);
 
-  // close with Escape key
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && sideDrawer.classList.contains('open')) closeDrawer();
-  });
+  <!-- =============================================
+       SECTION 4 — SKILLS
+       ============================================= -->
+  <section id="skills">
+    <div class="skills-wrap">
 
-  // if window resized larger and drawer open, keep it usable (still open)
-  // optionally close on resize to desktop — uncomment if desired:
-  // window.addEventListener('resize', ()=> { if(window.innerWidth > 1200 && sideDrawer.classList.contains('open')) closeDrawer(); });
+      <h2>My Art Skills</h2>
 
-  // trap focus inside drawer while open (basic)
-  document.addEventListener('focus', function(e){
-    if(!sideDrawer.classList.contains('open')) return;
-    if(sideDrawer.contains(e.target)) return;
-    // if focus moves outside, bring it back to drawer
-    e.stopPropagation();
-    drawerClose && drawerClose.focus();
-  }, true);
+      <!-- EDIT: change the name and data-width (0 to 100) for each skill -->
 
-})();
+      <div class="skill-row">
+        <div class="skill-label"><span>Character Design</span><span>92%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+      </div>
 
-// set year in footer
-  (function(){ 
-    const el = document.getElementById('drawerYear');
-    if(el) el.textContent = new Date().getFullYear();
-  })();
-</script>
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-  kofiWidgetOverlay.draw('blue_imagination', {
-    'type': 'floating-chat',
-    'floating-chat.donateButton.text': 'Support me',
-    'floating-chat.donateButton.background-color': '#00b9fe',
-    'floating-chat.donateButton.text-color': '#fff'
-  });
-</script>
+      <div class="skill-row">
+        <div class="skill-label"><span>Illustration</span><span>88%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label"><span>Digital Painting</span><span>80%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label"><span>Fan Art</span><span>95%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label"><span>Cute Design</span><span>97%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="97"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       SECTION 5 — CONTACT
+       ============================================= -->
+  <section id="contact">
+    <div class="contact-card">
+
+      <h2>Get in Touch</h2>
+      <!-- EDIT: change the text below -->
+      <p class="contact-sub">Let's make something wonderful!</p>
+
+      <!-- EDIT: replace href="#" with your real social media links -->
+      <div class="social-icons">
+
+        <!-- Email -->
+        <a href="#" class="social-icon s-mail" title="Email">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="3"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+        </a>
+
+        <!-- Heart / Favourite -->
+        <a href="#" class="social-icon s-heart" title="Favourite">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/>
+          </svg>
+        </a>
+
+        <!-- Facebook -->
+        <a href="#" class="social-icon s-fb" title="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="#" class="social-icon s-ig" title="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <p class="contact-tagline">Let's make something wonderful!</p>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <img src="signature.png" alt="Blue signature" class="footer-signature" />
+    <!-- EDIT: change to your name -->
+    <p>Blue Imagination &nbsp;&middot;&nbsp; Artist &amp; Illustrator &nbsp;&middot;&nbsp; Made with love</p>
+  </footer>
+
+
+  <!-- JavaScript file — must be in same folder! -->
+  <script src="script.js"></script>
+
 </body>
-
-
 </html>
-
-
-
